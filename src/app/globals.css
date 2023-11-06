@@ -75,6 +75,12 @@
   }
 }
 
+::selection {
+  background: hotpink;
+  color: white;
+}
+
+
 html, body {
   width: 100%;
   height: 100%;

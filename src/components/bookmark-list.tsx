@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import {
   Command,
   CommandEmpty,
@@ -10,6 +11,8 @@ import {
 } from "./ui/command";
 
 export function BookmarkList() {
+  const router = useRouter();
+
   function handlePaste() {
     console.log("paste");
   }
@@ -49,6 +52,9 @@ export function BookmarkList() {
           return (
             <CommandItem
               key={bookmark.id}
+              onSelect={(currentValue) => {
+                router.push(bookmark.url);
+              }}
               className="border-b last:border-none rounded-none"
             >
               <div className="px-4">

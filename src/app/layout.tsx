@@ -36,7 +36,7 @@ export default function RootLayout({
               >
                 <BookmarkIcon className="w-8 h-8" />
               </Link>
-              <div className="w-8 h-8 border rounded-full"></div>
+              <div className="w-8 h-8 rounded-full border-muted-foreground border-2"></div>
             </div>
           </header>
           <main className="container mx-auto flex-grow">{children}</main>

@@ -54,7 +54,7 @@ export function BookmarkList() {
         <div className="flex w-20 h-20 bg-muted items-center justify-center rounded-full">
           <BookmarkIcon className="w-8 h-8" />
         </div>
-        <div className="flex py-2 text-2xl font-semibold">
+        <div className="flex py-2 text-xl font-semibold">
           No Bookmarks Created
         </div>
         <div className="flex text-sm text-muted-foreground">

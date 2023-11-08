@@ -1,9 +1,11 @@
 "use client";
 
-import { BookmarkIcon } from "lucide-react";
+import { Bookmark } from "@prisma/client";
+import { ArrowDown, ArrowUp, BookmarkIcon, CornerDownLeft } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ClipboardEvent } from "react";
+import { ClipboardEvent, useRef } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 import { Button } from "./ui/button";
 import {
   Command,
@@ -14,39 +16,27 @@ import {
   CommandShortcut,
 } from "./ui/command";
 
-type Bookmark = {
-  id: number;
-  title: string;
-  url: string;
+type BookmarkListProps = {
+  bookmarks: Bookmark[];
 };
 
-export function BookmarkList() {
+export function BookmarkList({ bookmarks }: BookmarkListProps) {
+  const searchBarInput = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
+  useHotkeys(
+    "meta+k",
+    () => {
+      console.log("meta+k");
+      searchBarInput.current?.focus();
+    },
+    { preventDefault: true }
+  );
 
   function handlePaste(e: ClipboardEvent<HTMLInputElement>) {
     e.preventDefault();
     console.log("paste");
   }
-
-  const bookmarks: Bookmark[] = [
-    // { id: 1, title: "Google", url: "https://google.com" },
-    // { id: 2, title: "Facebook", url: "https://facebook.com" },
-    // { id: 3, title: "Twitter", url: "https://twitter.com" },
-    // { id: 4, title: "Instagram", url: "https://instagram.com" },
-    // { id: 5, title: "Youtube", url: "https://youtube.com" },
-    // { id: 6, title: "Twitch", url: "https://twitch.tv" },
-    // { id: 7, title: "Reddit", url: "https://reddit.com" },
-    // { id: 8, title: "Amazon", url: "https://amazon.com" },
-    // { id: 9, title: "Wikipedia", url: "https://wikipedia.org" },
-    // { id: 10, title: "Netflix", url: "https://netflix.com" },
-    // { id: 11, title: "Discord", url: "https://discord.com" },
-    // { id: 12, title: "Spotify", url: "https://spotify.com" },
-    // { id: 13, title: "Github", url: "https://github.com" },
-    // { id: 14, title: "LinkedIn", url: "https://linkedin.com" },
-    // { id: 15, title: "TikTok", url: "https://tiktok.com" },
-    // { id: 16, title: "Pinterest", url: "https://pinterest.com" },
-    // { id: 17, title: "Whatsapp", url: "https://whatsapp.com" },
-  ];
 
   if (bookmarks.length === 0) {
     return (
@@ -61,7 +51,9 @@ export function BookmarkList() {
           You don&apos;t have any bookmarks yet.
         </div>
         <div className="flex text-sm text-muted-foreground">
-          <Button className="mt-8">Create Bookmark</Button>
+          <Button className="mt-8" type="submit">
+            Create Bookmark
+          </Button>
         </div>
       </div>
     );
@@ -73,6 +65,8 @@ export function BookmarkList() {
         autoFocus
         placeholder="Search bookmarks..."
         onPaste={handlePaste}
+        ref={searchBarInput}
+        className="py-3 px-4 rounded-[0]"
       />
       <CommandEmpty className="flex items-center justify-center text-muted-foreground py-8">
         No bookmarks found.
@@ -85,7 +79,7 @@ export function BookmarkList() {
               onSelect={(currentValue) => {
                 router.push(bookmark.url);
               }}
-              className="border-b last:border-none rounded-none"
+              className="border-b last:border-none rounded-none py-3"
             >
               <div className="px-4">
                 <Image
@@ -100,13 +94,39 @@ export function BookmarkList() {
                 <div className="flex aria-selected:font-medium">
                   {bookmark.title}
                 </div>
-                <div className="flex text-muted-foreground">{bookmark.url}</div>
+                <div className="flex text-muted-foreground text-xs">
+                  {bookmark.url}
+                </div>
               </div>
-              <CommandShortcut>⌘{index + 1}</CommandShortcut>
             </CommandItem>
           );
         })}
       </CommandGroup>
+      <div className="flex items-center justify-between text-muted-foreground border-t border-muted text-xs py-4">
+        <div className="flex items-center gap-1">
+          <CommandShortcut className="bg-muted p-2 rounded-md">
+            ⌘K
+          </CommandShortcut>
+          <div>focus</div>
+        </div>
+
+        <div className="flex items-center gap-1">
+          <CommandShortcut className="bg-muted p-2 rounded-md">
+            <ArrowUp className="w-3 h-3" />
+          </CommandShortcut>
+          <CommandShortcut className="bg-muted p-2 rounded-md">
+            <ArrowDown className="w-3 h-3" />
+          </CommandShortcut>
+          <div>navigate</div>
+        </div>
+
+        <div className="flex items-center gap-1">
+          <CommandShortcut className="bg-muted p-2 rounded-md">
+            <CornerDownLeft className="w-3 h-3" />
+          </CommandShortcut>
+          <div>select</div>
+        </div>
+      </div>
     </Command>
   );
 }

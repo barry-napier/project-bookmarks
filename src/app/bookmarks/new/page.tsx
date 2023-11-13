@@ -9,7 +9,7 @@ export default function NewBookmarkPage() {
         <ChevronLeft className="mr-2 h-4 w-4" />
         Back
       </Link>
-      <div className="py-8 font-medium tracking-tight text-2xl md:text-5xl">
+      <div className="py-8 font-medium tracking-tight text-5xl">
         New Bookmark
       </div>
       <div className="text-muted-foreground mb-5">

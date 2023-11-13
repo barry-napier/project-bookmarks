@@ -16,7 +16,7 @@ export function AddNewButton() {
           <Button className="flex items-center gap-2">
             <div className="flex items-center gap-2">
               <PlusIcon className="w-4 h-4 md:hidden" />
-              <div className="hidden md:block">Add New ...</div>
+              <div className="hidden md:block">Add New</div>
               <ChevronDown className="w-4 h-4 hidden md:block" />
             </div>
           </Button>
@@ -25,9 +25,9 @@ export function AddNewButton() {
           <DropdownMenuItem>
             <Link href="/bookmarks/new">Bookmark</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          {/* <DropdownMenuItem>
             <Link href="/folders/new">Folder</Link>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
         </DropdownMenuContent>
       </DropdownMenu>
     </>

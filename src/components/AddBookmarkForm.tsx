@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { useToast } from "./ui/use-toast";
 
 const FormSchema = z.object({
   title: z.string().min(2, {
@@ -28,6 +28,8 @@ const FormSchema = z.object({
 
 export function AddBookmarkForm() {
   const router = useRouter();
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -50,14 +52,26 @@ export function AddBookmarkForm() {
 
       router.push("/");
       router.refresh();
+
+      toast({
+        title: "Bookmark added",
+        description: "Bookmark has been added to your list.",
+      });
     } catch (error) {
-      console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "An error occurred while adding your bookmark.",
+      });
     }
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-full md:w-2/3 space-y-6"
+      >
         <FormField
           control={form.control}
           name="title"
@@ -67,9 +81,7 @@ export function AddBookmarkForm() {
               <FormControl>
                 <Input placeholder="Example" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your identifing name for your bookmark.
-              </FormDescription>
+
               <FormMessage />
             </FormItem>
           )}
@@ -83,12 +95,14 @@ export function AddBookmarkForm() {
               <FormControl>
                 <Input placeholder="https://www.example.com" {...field} />
               </FormControl>
-              <FormDescription>The bookmark URL.</FormDescription>
+
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="w-full md:w-auto">
+          Submit
+        </Button>
       </form>
     </Form>
   );

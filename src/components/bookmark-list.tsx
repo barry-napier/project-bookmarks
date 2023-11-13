@@ -33,9 +33,26 @@ export function BookmarkList({ bookmarks }: BookmarkListProps) {
 
   const router = useRouter();
 
-  function handlePaste(e: ClipboardEvent<HTMLInputElement>) {
+  async function handlePaste(e: ClipboardEvent<HTMLInputElement>) {
     e.preventDefault();
-    console.log("paste");
+    console.log("paste", e.clipboardData.getData("text/plain"));
+
+    const url = e.clipboardData.getData("text/plain");
+
+    if (url) {
+      const response = await fetch("/api/bookmarks", {
+        method: "POST",
+        body: JSON.stringify({ title: url, url }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        router.push("/");
+        router.refresh();
+      }
+    }
   }
 
   if (bookmarks.length === 0) {

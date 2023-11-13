@@ -18,7 +18,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
@@ -72,7 +71,7 @@ export function BookmarkItem({ bookmark }: BookmarkListProps) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem className="p-0">
+            {/* <DropdownMenuItem className="p-0">
               <Button
                 variant="ghost"
                 onClick={(e) => {
@@ -83,8 +82,8 @@ export function BookmarkItem({ bookmark }: BookmarkListProps) {
               >
                 Edit
               </Button>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
+            </DropdownMenuItem> 
+            <DropdownMenuSeparator />*/}
             <DropdownMenuItem className="p-0">
               <Dialog open={deleteDialogOpen}>
                 <DialogTrigger asChild>

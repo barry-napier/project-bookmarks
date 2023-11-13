@@ -34,7 +34,7 @@ export function AddBookmarkForm() {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       title: "",
-      url: "",
+      url: "https://",
     },
   });
 

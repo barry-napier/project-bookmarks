@@ -1,4 +1,5 @@
 import { BookmarkIcon } from "lucide-react";
+import Link from "next/link";
 import { Button } from "./ui/button";
 
 export function NoBookmarks() {
@@ -14,9 +15,11 @@ export function NoBookmarks() {
         You don&apos;t have any bookmarks yet.
       </div>
       <div className="flex text-sm text-muted-foreground">
-        <Button className="mt-8" type="submit">
-          Create Bookmark
-        </Button>
+        <Link href="/bookmarks/new">
+          <Button className="mt-8" type="submit">
+            Create Bookmark
+          </Button>
+        </Link>
       </div>
     </div>
   );

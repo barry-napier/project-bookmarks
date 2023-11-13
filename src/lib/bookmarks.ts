@@ -2,7 +2,11 @@ import { db } from "./db";
 
 export async function getBookmarks() {
   try {
-    const bookmarks = await db.bookmark.findMany();
+    const bookmarks = db.bookmark.findMany({
+      orderBy: {
+        clicks: "desc",
+      },
+    });
     return bookmarks;
   } catch (error) {
     console.error(error);
@@ -30,6 +34,24 @@ export async function deleteBookmark(id: string) {
     await db.bookmark.delete({
       where: {
         id,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function incrementClickCount(id: string) {
+  console.log("incrementClickCount", id);
+  try {
+    await db.bookmark.update({
+      where: {
+        id,
+      },
+      data: {
+        clicks: {
+          increment: 1,
+        },
       },
     });
   } catch (error) {

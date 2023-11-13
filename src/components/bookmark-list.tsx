@@ -77,7 +77,16 @@ export function BookmarkList({ bookmarks }: BookmarkListProps) {
             return (
               <CommandItem
                 key={bookmark.id}
-                onSelect={(currentValue) => {
+                onSelect={async () => {
+                  fetch(`/api/bookmarks/${bookmark.id}`, {
+                    method: "PATCH",
+                    body: JSON.stringify({
+                      clickCount: bookmark.clicks + 1,
+                    }),
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                  });
                   router.push(bookmark.url);
                 }}
                 className="border-b border-accent last:border-none rounded-none py-3 flex items-center justify-between"

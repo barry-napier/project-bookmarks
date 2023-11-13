@@ -15,31 +15,44 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  title: z.string().min(2, {
+    message: "Title must be at least 2 characters.",
+  }),
+  url: z.string().url({
+    message: "URL must be a valid URL.",
   }),
 });
 
 export function AddBookmarkForm() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      username: "",
+      title: "",
+      url: "",
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    const { title, url } = data;
+
+    try {
+      const newBookmark = await fetch("/api/bookmarks", {
+        method: "POST",
+        body: JSON.stringify({ title, url }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      router.push("/");
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -47,16 +60,30 @@ export function AddBookmarkForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
         <FormField
           control={form.control}
-          name="username"
+          name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="Example" {...field} />
               </FormControl>
               <FormDescription>
-                This is your public display name.
+                This is your identifing name for your bookmark.
               </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="url"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>URL</FormLabel>
+              <FormControl>
+                <Input placeholder="https://www.example.com" {...field} />
+              </FormControl>
+              <FormDescription>The bookmark URL.</FormDescription>
               <FormMessage />
             </FormItem>
           )}

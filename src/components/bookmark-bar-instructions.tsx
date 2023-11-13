@@ -3,7 +3,7 @@ import { CommandShortcut } from "./ui/command";
 
 export function BookmarkBarInstructions() {
   return (
-    <div className="flex items-center justify-between text-muted-foreground border-t border-muted text-xs py-4">
+    <div className="flex items-center justify-between text-muted-foreground border-t border-accent text-xs py-4">
       <div className="flex items-center gap-1">
         <CommandShortcut className="bg-muted p-2 rounded-md">
           ⌘K

@@ -1,5 +1,5 @@
 import { ChevronDown, PlusIcon } from "lucide-react";
-import { AddBookmarkDialog } from "./add-bookmark-dialog";
+import Link from "next/link";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -23,9 +23,11 @@ export function AddNewButton() {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem>
-            <AddBookmarkDialog />
+            <Link href="/bookmarks/new">Bookmark</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>Folder</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/folders/new">Folder</Link>
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>

@@ -1,6 +1,5 @@
 "use client";
 
-import { deleteBookmark } from "@/actions/bookmark.actions";
 import { Bookmark } from "@prisma/client";
 import { AlertCircle, MoreHorizontalIcon } from "lucide-react";
 import Image from "next/image";
@@ -35,9 +34,15 @@ export function BookmarkItem({ bookmark }: BookmarkListProps) {
     router.push(`/bookmarks/${id}`);
   }
 
-  function handleDelete(id: string) {
-    deleteBookmark(id);
-    router.refresh();
+  async function handleDelete(id: string) {
+    const response = await fetch(`/api/bookmarks`, {
+      method: "DELETE",
+      body: JSON.stringify({ id }),
+    });
+
+    if (response.ok) {
+      router.refresh();
+    }
   }
 
   return (

@@ -1,10 +1,12 @@
 import { AddBookmarkForm } from "@/components/AddBookmarkForm";
+import { Header } from "@/components/header";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
 export default function NewBookmarkPage() {
   return (
     <div className="flex flex-col">
+      <Header />
       <Link href="/" className="ghost flex items-center">
         <ChevronLeft className="mr-2 h-4 w-4" />
         Back

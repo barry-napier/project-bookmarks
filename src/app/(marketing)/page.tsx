@@ -20,7 +20,7 @@ export default function MarketingPage() {
             the ability to Save, Organize, and Find Your Favorite Links Across
             Devices and Browsers, with Real-Time Syncing.
           </p>
-          <Link href="/bookmarks/new" className="text-center">
+          <Link href="/sign-up" className="text-center">
             <Button size="xl" className="w-full md:w-auto">
               Get Started
             </Button>

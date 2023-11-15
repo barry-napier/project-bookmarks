@@ -1,6 +1,7 @@
 import { MarketingHeader } from "@/components/marketing-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function MarketingPage() {
@@ -42,10 +43,12 @@ export default function MarketingPage() {
               </div>
             </div>
             <div className="flex rounded-md">
-              <img
+              <Image
                 alt="bookmarking.io banner image"
                 src="/banner.png"
                 className="overflow-hidden rounded-b-lg border"
+                width="1326"
+                height="1009"
               />
             </div>
           </div>

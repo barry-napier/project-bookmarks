@@ -16,7 +16,7 @@ export function Header() {
           </div>
         </Link>
         <div className="w-9 h-9 rounded-full flex items-center justify-center bg-gradient-to-t from-orange-400 to-pink-400">
-          <UserButton />
+          <UserButton afterSignOutUrl="https://bookmarking.io" />
         </div>
       </div>
     </header>

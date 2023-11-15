@@ -6,6 +6,11 @@ import Link from "next/link";
 
 export default function NewBookmarkPage() {
   const { userId } = auth();
+
+  if (!userId) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col">
       <Header />

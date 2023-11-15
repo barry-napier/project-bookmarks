@@ -8,7 +8,7 @@ export function NoBookmarks() {
       <div className="flex w-20 h-20 bg-muted items-center justify-center rounded-full">
         <BookmarkIcon className="w-8 h-8" />
       </div>
-      <div className="flex py-2 text-xl font-semibold">
+      <div className="flex py-2 text-xl font-semibold mt-6">
         No Bookmarks Created
       </div>
       <div className="flex text-sm text-muted-foreground">
@@ -16,7 +16,7 @@ export function NoBookmarks() {
       </div>
       <div className="flex text-sm text-muted-foreground">
         <Link href="/bookmarks/new">
-          <Button className="mt-8" type="submit">
+          <Button className="mt-8" type="submit" size="lg">
             Create Bookmark
           </Button>
         </Link>

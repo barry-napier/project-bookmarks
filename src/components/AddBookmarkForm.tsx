@@ -50,7 +50,7 @@ export function AddBookmarkForm() {
         },
       });
 
-      router.push("/");
+      router.push("/dashboard");
       router.refresh();
 
       toast({

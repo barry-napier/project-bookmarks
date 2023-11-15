@@ -89,7 +89,7 @@ export function BookmarkList({ bookmarks }: BookmarkListProps) {
                   });
                   router.push(bookmark.url);
                 }}
-                className="border-b border-accent last:border-none rounded-none py-3 flex items-center justify-between"
+                className="border-b border-accent last:border-none rounded-none py-3 flex items-center justify-between group"
               >
                 <BookmarkItem bookmark={bookmark} />
               </CommandItem>

@@ -1,7 +1,14 @@
 import { createBookmark, deleteBookmark, getBookmarks } from "@/lib/bookmarks";
+import { auth } from "@clerk/nextjs";
 
-export async function GET() {
-  const bookmarks = await getBookmarks();
+export async function GET(request: Request) {
+  const { userId, sessionId } = auth();
+
+  if (!sessionId) {
+    return Response.json({ id: null }, { status: 401 });
+  }
+
+  const bookmarks = await getBookmarks(userId);
 
   return Response.json(bookmarks, {
     status: 200,

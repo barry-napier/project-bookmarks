@@ -26,7 +26,7 @@ const FormSchema = z.object({
   }),
 });
 
-export function AddBookmarkForm() {
+export function AddBookmarkForm({ userId }: { userId: string }) {
   const router = useRouter();
   const { toast } = useToast();
 
@@ -44,7 +44,7 @@ export function AddBookmarkForm() {
     try {
       const newBookmark = await fetch("/api/bookmarks", {
         method: "POST",
-        body: JSON.stringify({ title, url }),
+        body: JSON.stringify({ title, url, userId }),
         headers: {
           "Content-Type": "application/json",
         },

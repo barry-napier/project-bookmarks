@@ -1,8 +1,11 @@
 import { db } from "./db";
 
-export async function getBookmarks() {
+export async function getBookmarks(userId: string) {
   try {
     const bookmarks = db.bookmark.findMany({
+      where: {
+        userId,
+      },
       orderBy: {
         clicks: "desc",
       },
@@ -14,12 +17,17 @@ export async function getBookmarks() {
   }
 }
 
-export async function createBookmark(title: string, url: string) {
+export async function createBookmark(
+  title: string,
+  url: string,
+  userId: string
+) {
   try {
     const bookmark = await db.bookmark.create({
       data: {
         title,
         url,
+        userId,
       },
     });
     return bookmark;

@@ -9,9 +9,9 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const { title, url } = await request.json();
+  const { title, url, userId } = await request.json();
 
-  const newBookmark = await createBookmark(title, url);
+  const newBookmark = await createBookmark(title, url, userId);
 
   return Response.json(newBookmark, {
     status: 201,

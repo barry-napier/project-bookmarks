@@ -14,6 +14,6 @@ model Bookmark {
   updatedAt DateTime @updatedAt
   title     String
   url       String
-  clicks Int    @default(0)
-
+  clicks    Int    @default(0)
+  userId    String
 }

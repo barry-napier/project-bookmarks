@@ -68,7 +68,7 @@ export function BookmarkItem({ bookmark }: BookmarkListProps) {
         </div>
       </div>
       <div>
-        <DropdownMenu>
+        <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="">
               <MoreHorizontalIcon className="w-4 h-4" />

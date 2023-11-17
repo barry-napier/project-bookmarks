@@ -50,13 +50,13 @@ export function BookmarkItem({ bookmark }: BookmarkListProps) {
         <div className="px-4">
           <Image
             src={`https://www.google.com/s2/favicons?domain=${bookmark.url}&sz=128`}
-            className="w-6 h-6 rounded-full bg-gradient-to-tr from-pink-400 to-blue-600"
+            className="w-6 h-6 rounded-full bg-gradient-to-tr from-pink-400 to-blue-600 z-10"
             width={24}
             height={24}
             alt={bookmark.title}
             onError={({ currentTarget }) => {
-              currentTarget.onerror = null; // prevents looping
-              currentTarget.src = "/";
+              currentTarget.id = "broken-image";
+              currentTarget.srcset = "";
             }}
           />
         </div>

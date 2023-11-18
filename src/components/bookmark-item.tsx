@@ -62,7 +62,7 @@ export function BookmarkItem({ bookmark }: BookmarkListProps) {
         </div>
         <div className="flex flex-col">
           <div className="flex aria-selected:font-medium">{bookmark.title}</div>
-          <div className="flex text-muted-foreground text-xs">
+          <div className="text-muted-foreground text-xs w-48 md:w-auto text-ellipsis overflow-hidden whitespace-nowrap">
             {bookmark.url}
           </div>
         </div>

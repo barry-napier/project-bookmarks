@@ -18,33 +18,29 @@ import { useRouter } from "next/navigation";
 import { useToast } from "./ui/use-toast";
 
 const FormSchema = z.object({
-  title: z.string().min(2, {
-    message: "Title must be at least 2 characters.",
-  }),
-  url: z.string().url({
-    message: "URL must be a valid URL.",
+  folderName: z.string().min(1, {
+    message: "Name must be at least 1 characters.",
   }),
 });
 
-export function AddBookmarkForm({ userId }: { userId: string }) {
+export function AddFolderForm({ userId }: { userId: string }) {
   const router = useRouter();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      title: "",
-      url: "https://",
+      folderName: "",
     },
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    const { title, url } = data;
+    const { folderName } = data;
 
     try {
-      const newBookmark = await fetch("/api/bookmarks", {
+      const newFolder = await fetch("/api/folders", {
         method: "POST",
-        body: JSON.stringify({ title, url, userId }),
+        body: JSON.stringify({ folderName, userId }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -54,8 +50,8 @@ export function AddBookmarkForm({ userId }: { userId: string }) {
       router.refresh();
 
       toast({
-        title: "Bookmark added",
-        description: "Bookmark has been added to your list.",
+        title: "Folder added",
+        description: "Folder has been added to your list.",
       });
     } catch (error) {
       toast({
@@ -74,28 +70,13 @@ export function AddBookmarkForm({ userId }: { userId: string }) {
       >
         <FormField
           control={form.control}
-          name="title"
+          name="folderName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <FormLabel>Name</FormLabel>
               <FormControl>
                 <Input placeholder="Example" {...field} />
               </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="url"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>URL</FormLabel>
-              <FormControl>
-                <Input placeholder="https://www.example.com" {...field} />
-              </FormControl>
-
               <FormMessage />
             </FormItem>
           )}

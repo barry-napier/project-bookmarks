@@ -25,7 +25,6 @@ export function BookmarkList({ bookmarks }: BookmarkListProps) {
   useHotkeys(
     "meta+k",
     () => {
-      console.log("meta+k");
       searchBarInput.current?.focus();
     },
     { preventDefault: true }
@@ -35,7 +34,6 @@ export function BookmarkList({ bookmarks }: BookmarkListProps) {
 
   async function handlePaste(e: ClipboardEvent<HTMLInputElement>) {
     e.preventDefault();
-    console.log("paste", e.clipboardData.getData("text/plain"));
 
     const url = e.clipboardData.getData("text/plain");
 

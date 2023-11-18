@@ -1,5 +1,8 @@
+"use client";
+
 import { ChevronDown, PlusIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -9,6 +12,8 @@ import {
 } from "./ui/dropdown-menu";
 
 export function AddNewButton() {
+  const router = useRouter();
+
   return (
     <>
       <DropdownMenu modal={false}>
@@ -22,12 +27,12 @@ export function AddNewButton() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => router.push(`/bookmarks/new`)}>
             <Link href="/bookmarks/new">Bookmark</Link>
           </DropdownMenuItem>
-          {/* <DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => router.push(`/folders/new`)}>
             <Link href="/folders/new">Folder</Link>
-          </DropdownMenuItem> */}
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>

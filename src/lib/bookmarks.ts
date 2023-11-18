@@ -38,7 +38,8 @@ export async function getBookmarksByFolder(userId: string, folderId: string) {
 export async function createBookmark(
   title: string,
   url: string,
-  userId: string
+  userId: string,
+  folderId: string
 ) {
   try {
     const bookmark = await db.bookmark.create({
@@ -46,6 +47,7 @@ export async function createBookmark(
         title,
         url,
         userId,
+        folderId,
       },
     });
     return bookmark;
@@ -68,7 +70,6 @@ export async function deleteBookmark(id: string) {
 }
 
 export async function incrementClickCount(id: string) {
-  console.log("incrementClickCount", id);
   try {
     await db.bookmark.update({
       where: {
@@ -91,8 +92,6 @@ export async function updateBookmark(
   userId: string,
   id: string
 ) {
-  console.log("DB PUT", title, url, userId, id);
-
   try {
     const bookmark = await db.bookmark.update({
       where: {

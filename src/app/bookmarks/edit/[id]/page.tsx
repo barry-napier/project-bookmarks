@@ -1,15 +1,32 @@
-import { AddBookmarkForm } from "@/components/AddBookmarkForm";
+import { EditBookmarkForm } from "@/components/EditBookmarkForm";
 import { Header } from "@/components/header";
+import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
-export default function NewBookmarkPage() {
+export default async function NewBookmarkPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const { userId } = auth();
 
   if (!userId) {
     return null;
   }
+
+  const { id } = params;
+
+  const bookmark = await db.bookmark.findUnique({
+    where: { id },
+  });
+
+  if (!bookmark) {
+    return null;
+  }
+
+  console.log(bookmark);
 
   return (
     <div className="flex flex-col">
@@ -19,12 +36,12 @@ export default function NewBookmarkPage() {
         Back
       </Link>
       <div className="py-8 font-medium tracking-tight text-5xl">
-        New Bookmark
+        Edit Bookmark
       </div>
       <div className="text-muted-foreground mb-5">
-        Please provide the information below to add your bookmark.
+        Please provide the information below to update your bookmark.
       </div>
-      <AddBookmarkForm userId={userId} />
+      <EditBookmarkForm userId={userId} bookmark={bookmark} />
     </div>
   );
 }

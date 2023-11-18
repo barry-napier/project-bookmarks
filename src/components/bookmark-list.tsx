@@ -63,7 +63,6 @@ export function BookmarkList({ bookmarks }: BookmarkListProps) {
     <div className="my-4">
       <Command>
         <CommandInput
-          autoFocus
           placeholder="Search bookmarks..."
           onPaste={handlePaste}
           ref={searchBarInput}

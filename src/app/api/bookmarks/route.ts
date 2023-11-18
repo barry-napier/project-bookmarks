@@ -1,4 +1,9 @@
-import { createBookmark, deleteBookmark, getBookmarks } from "@/lib/bookmarks";
+import {
+  createBookmark,
+  deleteBookmark,
+  getBookmarks,
+  updateBookmark,
+} from "@/lib/bookmarks";
 import { auth } from "@clerk/nextjs";
 
 export async function GET(request: Request) {
@@ -38,4 +43,16 @@ export async function DELETE(request: Request) {
       status: 200,
     }
   );
+}
+
+export async function PUT(request: Request) {
+  const { title, url, userId, id } = await request.json();
+
+  console.log("PUT", title, url, userId, id);
+
+  const updatedBookmark = await updateBookmark(title, url, userId, id);
+
+  return Response.json(updatedBookmark, {
+    status: 200,
+  });
 }

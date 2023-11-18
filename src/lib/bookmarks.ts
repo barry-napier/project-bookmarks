@@ -66,3 +66,28 @@ export async function incrementClickCount(id: string) {
     console.error(error);
   }
 }
+
+export async function updateBookmark(
+  title: string,
+  url: string,
+  userId: string,
+  id: string
+) {
+  console.log("DB PUT", title, url, userId, id);
+
+  try {
+    const bookmark = await db.bookmark.update({
+      where: {
+        id,
+      },
+      data: {
+        title,
+        url,
+      },
+    });
+    return bookmark;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}

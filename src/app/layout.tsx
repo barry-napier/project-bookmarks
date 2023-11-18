@@ -39,7 +39,9 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <BackgroundGradient />
-            <main className="container mx-auto flex-grow">{children}</main>
+            <main className="container mx-0 md:mx-auto flex-grow px-2 md:px-8">
+              {children}
+            </main>
             <Footer />
             <Toaster />
           </ThemeProvider>

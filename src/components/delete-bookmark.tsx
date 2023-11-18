@@ -46,7 +46,9 @@ export function DeleteBookmark({ bookmark }: { bookmark: Bookmark }) {
             <AlertCircle className="text-destructive" />
             Are you sure you want to delete this bookmark?
           </DialogTitle>
-          <DialogDescription>This action cannot be undone.</DialogDescription>
+          <DialogDescription className="pt-2">
+            This action cannot be undone.
+          </DialogDescription>
         </DialogHeader>
         <div className="flex items-center gap-2 justify-end">
           <Button

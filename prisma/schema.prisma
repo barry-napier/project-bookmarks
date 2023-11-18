@@ -30,6 +30,4 @@ model Folder {
   name      String
   userId    String
   bookmarks Bookmark[]
-
-
 }

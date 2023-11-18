@@ -17,6 +17,24 @@ export async function getBookmarks(userId: string) {
   }
 }
 
+export async function getBookmarksByFolder(userId: string, folderId: string) {
+  try {
+    const bookmarks = db.bookmark.findMany({
+      where: {
+        userId,
+        folderId,
+      },
+      orderBy: {
+        clicks: "desc",
+      },
+    });
+    return bookmarks;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
 export async function createBookmark(
   title: string,
   url: string,

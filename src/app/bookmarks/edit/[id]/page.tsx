@@ -26,8 +26,6 @@ export default async function NewBookmarkPage({
     return null;
   }
 
-  console.log(bookmark);
-
   return (
     <div className="flex flex-col">
       <Header />

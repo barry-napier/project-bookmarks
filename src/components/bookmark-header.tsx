@@ -1,16 +1,26 @@
-import { ChevronDown } from "lucide-react";
+import { db } from "@/lib/db";
+import { auth } from "@clerk/nextjs";
+import { Folder } from "@prisma/client";
 import { AddNewButton } from "./add-new";
+import { FolderSelection } from "./folder-selection";
 
-export function BookmarkHeader() {
+export async function BookmarkHeader({
+  selectedFolder = null,
+}: {
+  selectedFolder?: Folder | null;
+}) {
+  const { userId } = auth();
+
+  if (!userId) {
+    return null;
+  }
+
+  const folders = await db.folder.findMany({ where: { userId: userId } });
+
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-2">
-        <div className="py-8 font-medium tracking-tight text-muted-foreground flex items-center text-2xl md:text-5xl">
-          <div className="flex items-center gap-2">
-            <ChevronDown className="w-8 h-8" />
-            All
-          </div>
-        </div>
+        <FolderSelection folders={folders} selectedFolder={selectedFolder} />
         <h1 className="py-8 font-medium tracking-tight text-2xl md:text-5xl">
           Bookmarks
         </h1>

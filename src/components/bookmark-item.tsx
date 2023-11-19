@@ -16,7 +16,7 @@ export function BookmarkItem({ bookmark }: BookmarkListProps) {
         <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-pink-400 rounded-full"></div>
         <div className="flex flex-col">
           <div className="flex aria-selected:font-medium">{bookmark.title}</div>
-          <div className="text-muted-foreground text-xs sm:w-48 md:w-[500px] text-ellipsis overflow-hidden whitespace-nowrap">
+          <div className="text-muted-foreground text-xs w-48 md:w-[500px] lg:w-auto text-ellipsis overflow-hidden whitespace-nowrap">
             {bookmark.url}
           </div>
         </div>

@@ -40,7 +40,7 @@ export function AddBookmarkForm({
   folders,
 }: {
   userId: string;
-  folders: Folder[];
+  folders: Folder[] | null;
 }) {
   const router = useRouter();
   const { toast } = useToast();
@@ -114,33 +114,35 @@ export function AddBookmarkForm({
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="folderId"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Folder</FormLabel>
-              <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Select folder" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {folders.map((folder) => (
-                      <SelectItem key={folder.id} value={folder.id}>
-                        {folder.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {folders && (
+          <FormField
+            control={form.control}
+            name="folderId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Folder</FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="Select folder" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {folders.map((folder) => (
+                        <SelectItem key={folder.id} value={folder.id}>
+                          {folder.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
         <Button type="submit" className="w-full md:w-auto">
           Submit
         </Button>

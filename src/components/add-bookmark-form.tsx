@@ -130,6 +130,9 @@ export function AddBookmarkForm({
                       <SelectValue placeholder="Select folder" />
                     </SelectTrigger>
                     <SelectContent>
+                      <SelectItem key="all" value="null">
+                        All
+                      </SelectItem>
                       {folders.map((folder) => (
                         <SelectItem key={folder.id} value={folder.id}>
                           {folder.name}

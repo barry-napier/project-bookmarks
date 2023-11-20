@@ -11,7 +11,7 @@ type BookmarkListProps = {
 export function BookmarkItem({ bookmark }: BookmarkListProps) {
   const router = useRouter();
   return (
-    <>
+    <div className="flex items-center justify-between w-full">
       <div className="flex gap-2">
         <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-pink-400 rounded-full"></div>
         <div className="flex flex-col">
@@ -21,7 +21,7 @@ export function BookmarkItem({ bookmark }: BookmarkListProps) {
           </div>
         </div>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="hidden group-aria-selected:flex items-center gap-2">
         <Button
           variant="outline"
           onClick={(e) => {
@@ -33,6 +33,6 @@ export function BookmarkItem({ bookmark }: BookmarkListProps) {
         </Button>
         <DeleteBookmark bookmark={bookmark} />
       </div>
-    </>
+    </div>
   );
 }

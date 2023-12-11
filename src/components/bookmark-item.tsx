@@ -9,7 +9,7 @@ type BookmarkListProps = {
   bookmark: Bookmark;
 };
 
-export function BookmarkItem({ bookmark }: BookmarkListProps) {
+export function BookmarkItem({ bookmark }: Readonly<BookmarkListProps>) {
   const router = useRouter();
   return (
     <div className="flex items-center justify-between w-full">

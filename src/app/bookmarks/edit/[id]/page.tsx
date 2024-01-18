@@ -1,4 +1,4 @@
-import { EditBookmarkForm } from "@/components/EditBookmarkForm";
+import { EditBookmarkForm } from "@/components/edit-bookmark-form";
 import { Header } from "@/components/header";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";

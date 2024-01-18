@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Folder } from "@prisma/client";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
   Select,
@@ -31,6 +32,9 @@ const FormSchema = z.object({
   }),
   url: z.string().url({
     message: "URL must be a valid URL.",
+  }),
+  favicon: z.string().url({
+    message: "Favicon must be a valid URL.",
   }),
   folderId: z.string(),
 });
@@ -50,17 +54,18 @@ export function AddBookmarkForm({
     defaultValues: {
       title: "",
       url: "",
+      favicon: "",
       folderId: "",
     },
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    const { title, url, folderId } = data;
+    const { title, url, favicon, folderId } = data;
 
     try {
       const newBookmark = await fetch("/api/bookmarks", {
         method: "POST",
-        body: JSON.stringify({ title, url, userId, folderId }),
+        body: JSON.stringify({ title, url, userId, favicon, folderId }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -112,6 +117,31 @@ export function AddBookmarkForm({
               </FormControl>
               <FormMessage />
             </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="favicon"
+          render={({ field }) => (
+            <div>
+              <FormItem>
+                <FormLabel>Favicon</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    value={`https://www.google.com/s2/favicons?domain=${field.value}&sz=128`}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+              <Image
+                src={field.value}
+                alt="Bookmark icon"
+                width="32"
+                height="32"
+                loading="lazy"
+              />
+            </div>
           )}
         />
         {folders && (

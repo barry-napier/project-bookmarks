@@ -21,7 +21,7 @@ export function BookmarkItem({ bookmark }: Readonly<BookmarkListProps>) {
           </div>
         </div>
       </div>
-      <div className="hidden group-aria-selected:flex items-center gap-2">
+      <div className="hidden group-aria-selected:flex items-center gap-2 h-4">
         <Button
           variant="outline"
           onClick={(e) => {

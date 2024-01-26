@@ -1,4 +1,3 @@
-import { UserButton } from "@clerk/nextjs";
 import { BookmarkIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -15,9 +14,6 @@ export function Header() {
             Bookmarking.io
           </div>
         </Link>
-        <div className="w-9 h-9 rounded-full flex items-center justify-center bg-gradient-to-t from-orange-400 to-pink-400">
-          <UserButton afterSignOutUrl="https://bookmarking.io" />
-        </div>
       </div>
     </header>
   );

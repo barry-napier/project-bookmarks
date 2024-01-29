@@ -31,8 +31,8 @@ export function EditBookmarkForm({
   userId,
   bookmark,
 }: {
-  userId: string;
-  bookmark: Bookmark;
+  readonly userId: string;
+  readonly bookmark: Bookmark;
 }) {
   const router = useRouter();
   const { toast } = useToast();
@@ -49,7 +49,7 @@ export function EditBookmarkForm({
     const { title, url } = data;
 
     try {
-      const newBookmark = await fetch("/api/bookmarks", {
+      await fetch("/api/bookmarks", {
         method: "PUT",
         body: JSON.stringify({ title, url, userId, id: bookmark.id }),
         headers: {

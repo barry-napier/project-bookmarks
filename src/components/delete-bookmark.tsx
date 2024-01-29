@@ -12,7 +12,7 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 
-export function DeleteBookmark({ bookmark }: { bookmark: Bookmark }) {
+export function DeleteBookmark({ bookmark }: { readonly bookmark: Bookmark }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 

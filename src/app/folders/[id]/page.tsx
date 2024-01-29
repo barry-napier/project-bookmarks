@@ -3,18 +3,13 @@ import { BookmarkList } from "@/components/bookmark-list";
 import { Header } from "@/components/header";
 import { getBookmarksByFolder } from "@/lib/bookmarks";
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
 
 export default async function BookmarksByFolder({
   params,
 }: {
   params: { id: string };
 }) {
-  const { userId } = auth();
-
-  if (!userId) {
-    return null;
-  }
+  const userId = process.env.USER_ID ?? "";
 
   const { id: folderId } = params;
 

@@ -4,14 +4,9 @@ import {
   getBookmarks,
   updateBookmark,
 } from "@/lib/bookmarks";
-import { auth } from "@clerk/nextjs";
 
 export async function GET(request: Request) {
-  const { userId, sessionId } = auth();
-
-  if (!sessionId) {
-    return Response.json({ id: null }, { status: 401 });
-  }
+  const userId = process.env.USER_ID ?? "";
 
   const bookmarks = await getBookmarks(userId);
 

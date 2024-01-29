@@ -1,7 +1,7 @@
 import { EditBookmarkForm } from "@/components/edit-bookmark-form";
 import { Header } from "@/components/header";
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
+
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
@@ -10,11 +10,7 @@ export default async function NewBookmarkPage({
 }: {
   params: { id: string };
 }) {
-  const { userId } = auth();
-
-  if (!userId) {
-    return null;
-  }
+  const userId = process.env.USER_ID ?? "";
 
   const { id } = params;
 

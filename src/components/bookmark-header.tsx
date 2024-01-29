@@ -1,5 +1,4 @@
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
 import { Folder } from "@prisma/client";
 import { AddNewButton } from "./add-new";
 import { FolderSelection } from "./folder-selection";
@@ -9,11 +8,7 @@ export async function BookmarkHeader({
 }: {
   selectedFolder?: Folder | null;
 }) {
-  const { userId } = auth();
-
-  if (!userId) {
-    return null;
-  }
+  const userId = process.env.USER_ID ?? "";
 
   const folders = await db.folder.findMany({ where: { userId: userId } });
 

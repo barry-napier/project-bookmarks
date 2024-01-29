@@ -1,15 +1,10 @@
 import { Header } from "@/components/header";
-import { auth } from "@clerk/nextjs";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { AddFolderForm } from "../../../components/add-folder-form";
 
 export default function NewBookmarkPage() {
-  const { userId } = auth();
-
-  if (!userId) {
-    return null;
-  }
+  const userId = process.env.USER_ID ?? "";
 
   return (
     <div className="flex flex-col">

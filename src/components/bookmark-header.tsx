@@ -6,7 +6,7 @@ import { FolderSelection } from "./folder-selection";
 export async function BookmarkHeader({
   selectedFolder = null,
 }: {
-  selectedFolder?: Folder | null;
+  readonly selectedFolder?: Folder | null;
 }) {
   const userId = process.env.USER_ID ?? "";
 

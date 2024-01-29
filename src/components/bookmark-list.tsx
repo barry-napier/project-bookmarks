@@ -65,6 +65,7 @@ export function BookmarkList({ bookmarks }: BookmarkListProps) {
           onPaste={handlePaste}
           ref={searchBarInput}
           className="py-3 px-4 rounded-[0]"
+          autoFocus
         />
         <CommandEmpty className="flex items-center justify-center text-muted-foreground py-8">
           No bookmarks found.

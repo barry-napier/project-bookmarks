@@ -2,6 +2,7 @@ import { BookmarkHeader } from '@/components/bookmark-header';
 import { BookmarkList } from '@/components/bookmark-list';
 import { Header } from '@/components/header';
 import { createClient } from '@/lib/supabase/server';
+import { Bookmarks } from '@/types';
 import { redirect } from 'next/navigation';
 
 export default async function Home() {
@@ -13,8 +14,9 @@ export default async function Home() {
   }
 
   const userId = data.user.id;
-  const { data: bookmarks } = await supabase.from('bookmarks').select();
+  const { data: stuff } = await supabase.from('bookmarks').select();
 
+  const bookmarks = stuff as Bookmarks[];
   return (
     <>
       {userId}

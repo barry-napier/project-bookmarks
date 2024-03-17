@@ -1,3 +1,11 @@
 import { Database } from '@/database.types';
 
-export type Bookmarks = Database['public']['Tables']['bookmarks'];
+export type Bookmarks = {
+  id: string;
+  title: string;
+  url: string;
+  description: string;
+  folderId: string;
+  userId: string;
+  clicks: number;
+};

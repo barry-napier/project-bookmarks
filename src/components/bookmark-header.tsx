@@ -1,21 +1,22 @@
-import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
-import { Folder } from "@prisma/client";
-import { AddNewButton } from "./add-new";
-import { FolderSelection } from "./folder-selection";
+import { createClient } from '@/lib/supabase/server';
+import { AddNewButton } from './add-new';
+import { FolderSelection } from './folder-selection';
+import { redirect } from 'next/navigation';
 
 export async function BookmarkHeader({
   selectedFolder = null,
 }: {
   selectedFolder?: Folder | null;
 }) {
-  const { userId } = auth();
+  const supabase = createClient();
 
-  if (!userId) {
-    return null;
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data?.user) {
+    redirect('/login');
   }
 
-  const folders = await db.folder.findMany({ where: { userId: userId } });
+  const userId = data.user.id;
+  const { data: folders } = await supabase.from('folders').select();
 
   return (
     <div className="flex items-center justify-between">

@@ -1,18 +1,21 @@
-import { AddBookmarkForm } from "@/components/add-bookmark-form";
-import { Header } from "@/components/header";
-import { getFolders } from "@/lib/folder";
-import { auth } from "@clerk/nextjs";
-import { ChevronLeft } from "lucide-react";
-import Link from "next/link";
+import { AddBookmarkForm } from '@/components/add-bookmark-form';
+import { Header } from '@/components/header';
+import { createClient } from '@/lib/supabase/server';
+import { ChevronLeft } from 'lucide-react';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 export default async function NewBookmarkPage() {
-  const { userId } = auth();
+  const supabase = createClient();
 
-  if (!userId) {
-    return null;
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data?.user) {
+    redirect('/login');
   }
 
-  const folders = await getFolders(userId);
+  const userId = data.user.id;
+
+  const { data: folders } = await supabase.from('folders').select();
 
   return (
     <div className="flex flex-col">

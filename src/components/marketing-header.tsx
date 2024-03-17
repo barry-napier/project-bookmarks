@@ -1,10 +1,19 @@
-import { auth } from "@clerk/nextjs";
-import { BookmarkIcon } from "lucide-react";
-import Link from "next/link";
-import { Button } from "./ui/button";
+import { BookmarkIcon } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from './ui/button';
+import { createClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
 
-export function MarketingHeader() {
-  const { userId } = auth();
+export async function MarketingHeader() {
+  const supabase = createClient();
+
+  // const { data, error } = await supabase.auth.getUser();
+
+  // if (error || !data?.user) {
+  //   redirect('/');
+  // }
+
+  const userId = null;
 
   return (
     <header>
@@ -26,7 +35,7 @@ export function MarketingHeader() {
           </div>
         ) : (
           <div className="flex items-center gap-2">
-            <Link href="/sign-in">
+            <Link href="/login">
               <Button variant="ghost" size="sm">
                 Log In
               </Button>

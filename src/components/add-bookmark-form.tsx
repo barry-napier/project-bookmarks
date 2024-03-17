@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -12,29 +12,28 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Folder } from "@prisma/client";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
-import { useToast } from "./ui/use-toast";
+} from './ui/select';
+import { useToast } from './ui/use-toast';
 
 const FormSchema = z.object({
   title: z.string().min(2, {
-    message: "Title must be at least 2 characters.",
+    message: 'Title must be at least 2 characters.',
   }),
   url: z.string().url({
-    message: "URL must be a valid URL.",
+    message: 'URL must be a valid URL.',
   }),
   favicon: z.string().url({
-    message: "Favicon must be a valid URL.",
+    message: 'Favicon must be a valid URL.',
   }),
   folderId: z.string(),
 });
@@ -52,10 +51,10 @@ export function AddBookmarkForm({
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      title: "",
-      url: "",
-      favicon: "",
-      folderId: "",
+      title: '',
+      url: '',
+      favicon: '',
+      folderId: '',
     },
   });
 
@@ -63,26 +62,26 @@ export function AddBookmarkForm({
     const { title, url, favicon, folderId } = data;
 
     try {
-      const newBookmark = await fetch("/api/bookmarks", {
-        method: "POST",
+      const newBookmark = await fetch('/api/bookmarks', {
+        method: 'POST',
         body: JSON.stringify({ title, url, userId, favicon, folderId }),
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
 
-      router.push("/dashboard");
+      router.push('/dashboard');
       router.refresh();
 
       toast({
-        title: "Bookmark added",
-        description: "Bookmark has been added to your list.",
+        title: 'Bookmark added',
+        description: 'Bookmark has been added to your list.',
       });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "An error occurred while adding your bookmark.",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'An error occurred while adding your bookmark.',
       });
     }
   }

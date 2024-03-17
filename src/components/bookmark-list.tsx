@@ -1,29 +1,36 @@
-"use client";
+'use client';
 
-import { Bookmark } from "@prisma/client";
-import { useRouter } from "next/navigation";
-import { ClipboardEvent, useRef } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
-import { BookmarkBarInstructions } from "./bookmark-bar-instructions";
-import { BookmarkItem } from "./bookmark-item";
-import { NoBookmarks } from "./no-bookmarks";
+import { useRouter } from 'next/navigation';
+import { ClipboardEvent, useRef } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
+import { BookmarkBarInstructions } from './bookmark-bar-instructions';
+import { BookmarkItem } from './bookmark-item';
+import { NoBookmarks } from './no-bookmarks';
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from "./ui/command";
+} from './ui/command';
+
+type Bookmark = {
+  id: string;
+  title: string;
+  url: string;
+  folderId: string;
+  clicks: number;
+};
 
 type BookmarkListProps = {
   bookmarks: Bookmark[];
 };
 
-export function BookmarkList({ bookmarks }: BookmarkListProps) {
+export function BookmarkList({ bookmarks }: Readonly<BookmarkListProps>) {
   const searchBarInput = useRef<HTMLInputElement>(null);
 
   useHotkeys(
-    "meta+k",
+    'meta+k',
     () => {
       searchBarInput.current?.focus();
     },
@@ -35,25 +42,25 @@ export function BookmarkList({ bookmarks }: BookmarkListProps) {
   async function handlePaste(e: ClipboardEvent<HTMLInputElement>) {
     e.preventDefault();
 
-    const url = e.clipboardData.getData("text/plain");
+    const url = e.clipboardData.getData('text/plain');
 
     if (url) {
-      const response = await fetch("/api/bookmarks", {
-        method: "POST",
+      const response = await fetch('/api/bookmarks', {
+        method: 'POST',
         body: JSON.stringify({ title: url, url }),
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
 
       if (response.ok) {
-        router.push("/");
+        router.push('/');
         router.refresh();
       }
     }
   }
 
-  if (bookmarks.length === 0) {
+  if (bookmarks?.length === 0) {
     return <NoBookmarks />;
   }
 
@@ -70,18 +77,18 @@ export function BookmarkList({ bookmarks }: BookmarkListProps) {
           No bookmarks found.
         </CommandEmpty>
         <CommandGroup>
-          {bookmarks.map((bookmark, index) => {
+          {bookmarks?.map((bookmark, index) => {
             return (
               <CommandItem
                 key={bookmark.id}
                 onSelect={async () => {
                   fetch(`/api/bookmarks/${bookmark.id}`, {
-                    method: "PATCH",
+                    method: 'PATCH',
                     body: JSON.stringify({
                       clickCount: bookmark.clicks + 1,
                     }),
                     headers: {
-                      "Content-Type": "application/json",
+                      'Content-Type': 'application/json',
                     },
                   });
                   router.push(bookmark.url);

@@ -1,20 +1,24 @@
-import { BookmarkHeader } from "@/components/bookmark-header";
-import { BookmarkList } from "@/components/bookmark-list";
-import { Header } from "@/components/header";
-import { getBookmarks } from "@/lib/bookmarks";
-import { auth } from "@clerk/nextjs";
+import { BookmarkHeader } from '@/components/bookmark-header';
+import { BookmarkList } from '@/components/bookmark-list';
+import { Header } from '@/components/header';
+import { createClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
+import { Bookmarks } from '@/types/index';
 
 export default async function Home() {
-  const { userId } = auth();
+  const supabase = createClient();
 
-  if (!userId) {
-    return null;
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data?.user) {
+    redirect('/login');
   }
 
-  const bookmarks = await getBookmarks(userId);
+  const userId = data.user.id;
+  const { data: bookmarks } = await supabase.from('bookmarks').select();
 
   return (
     <>
+      {userId}
       <Header />
       <section>
         <BookmarkHeader />

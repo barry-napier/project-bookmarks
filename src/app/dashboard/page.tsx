@@ -14,7 +14,9 @@ export default async function Home() {
   }
 
   const userId = data.user.id;
-  const { data: bookmarks } = await supabase.from('bookmarks').select();
+  const { data: bookmarks }: { data: Bookmarks[] } = await supabase
+    .from('bookmarks')
+    .select();
 
   return (
     <>

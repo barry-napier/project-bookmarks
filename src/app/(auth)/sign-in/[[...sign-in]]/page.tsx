@@ -1,16 +1,16 @@
-import { SignIn, auth } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
+import { redirect } from "next/navigation"
+import { auth, SignIn } from "@clerk/nextjs"
 
 export default function Page() {
-  const { userId } = auth();
+  const { userId } = auth()
 
   if (userId) {
-    redirect("/dashboard");
+    redirect("/dashboard")
   }
 
   return (
-    <div className="grid place-content-center h-full">
+    <div className="grid h-full place-content-center">
       <SignIn />
     </div>
-  );
+  )
 }

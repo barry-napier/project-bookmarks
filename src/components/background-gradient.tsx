@@ -1,3 +1,3 @@
 export function BackgroundGradient() {
-  return <div className="bg-radial-gradient"></div>;
+  return <div className="bg-radial-gradient"></div>
 }

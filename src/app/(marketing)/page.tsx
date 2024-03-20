@@ -1,24 +1,25 @@
-import { Features } from "@/components/features";
-import { MarketingHeader } from "@/components/marketing-header";
-import Pricing from "@/components/pricing";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
+
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Features } from "@/components/features"
+import { MarketingHeader } from "@/components/marketing-header"
+import Pricing from "@/components/pricing"
 
 export default function MarketingPage() {
   return (
     <>
       <MarketingHeader />
       <section>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32">
+        <div className="mx-auto max-w-7xl px-4 pb-16 pt-20 text-center sm:px-6 lg:px-8 lg:pt-32">
           <div className="mx-auto">
             <Badge className="w-auto">bookmarking.io</Badge>
           </div>
-          <h1 className="tracking-tight text-5xl md:text-6xl font-bold text-center [text-wrap:balance] mt-6">
+          <h1 className="mt-6 text-center text-5xl font-bold tracking-tight [text-wrap:balance] md:text-6xl">
             Effortlessly Save, Organize, & Find Your Favorite Links
           </h1>
-          <p className="text-muted-foreground text-center [text-wrap:balance] px-8 mt-6 mb-10">
+          <p className="mb-10 mt-6 px-8 text-center text-muted-foreground [text-wrap:balance]">
             Simplify Your Web Life with Our Intuitive Bookmark Manager. Unlock
             the ability to Save, Organize, and Find Your Favorite Links Across
             Devices and Browsers, with Real-Time Syncing.
@@ -30,16 +31,16 @@ export default function MarketingPage() {
           </Link>
         </div>
         <div>
-          <div className="bg-background w-full rounded-xl p-1 border shadow-2xl mb-10 shadow-[#777] hidden md:block">
+          <div className="mb-10 hidden w-full rounded-xl border bg-background p-1 shadow-2xl shadow-[#777] md:block">
             <div className="flex items-center ">
-              <div className="p-4 flex items-center gap-2">
-                <div className="rounded-full w-3 h-3 bg-muted-foreground"></div>
-                <div className="rounded-full w-3 h-3 bg-muted-foreground"></div>
-                <div className="rounded-full w-3 h-3 bg-muted-foreground"></div>
+              <div className="flex items-center gap-2 p-4">
+                <div className="h-3 w-3 rounded-full bg-muted-foreground"></div>
+                <div className="h-3 w-3 rounded-full bg-muted-foreground"></div>
+                <div className="h-3 w-3 rounded-full bg-muted-foreground"></div>
               </div>
 
-              <div className="p-3 px-8 flex items-center gap-2 grow">
-                <div className="w-full bg-muted text-center rounded-sm py-1 text-muted-foreground border text-sm">
+              <div className="flex grow items-center gap-2 p-3 px-8">
+                <div className="w-full rounded-sm border bg-muted py-1 text-center text-sm text-muted-foreground">
                   bookmarking.io
                 </div>
               </div>
@@ -59,5 +60,5 @@ export default function MarketingPage() {
       <Features />
       <Pricing />
     </>
-  );
+  )
 }

@@ -1,20 +1,20 @@
-import { BookmarkIcon } from "lucide-react";
-import Link from "next/link";
+import Link from "next/link"
+import { BookmarkIcon } from "lucide-react"
 
 export function Header() {
   return (
     <header>
-      <div className="py-8 flex items-center justify-between">
+      <div className="flex items-center justify-between py-8">
         <Link
           href="\"
-          className="text-foreground hover:text-foreground flex items-center gap-1"
+          className="flex items-center gap-1 text-foreground hover:text-foreground"
         >
-          <BookmarkIcon className="w-7 h-7" />
-          <div className="flex font-semibold text-xl tracking-tight">
+          <BookmarkIcon className="h-7 w-7" />
+          <div className="flex text-xl font-semibold tracking-tight">
             Bookmarking.io
           </div>
         </Link>
       </div>
     </header>
-  );
+  )
 }

@@ -7,8 +7,9 @@ import {
   SearchCheckIcon,
   Share2Icon,
   TagsIcon,
-} from "lucide-react";
-import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
+} from "lucide-react"
+
+import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card"
 
 export function Features() {
   const features = [
@@ -66,7 +67,7 @@ export function Features() {
       description:
         "Gain insights into your bookmarking habits with analytics and statistics, helping you better understand your browsing behavior.",
     },
-  ];
+  ]
 
   return (
     <section className="flex flex-col gap-8 py-40">
@@ -76,8 +77,8 @@ export function Features() {
           <Card key={heading} className="shadow-md">
             <CardHeader>
               <CardTitle className="text-base">
-                <div className="flex items-center gap-2 mb-6">
-                  {Icon && <Icon className="w-6 h-6" />} {heading}
+                <div className="mb-6 flex items-center gap-2">
+                  {Icon && <Icon className="h-6 w-6" />} {heading}
                 </div>
               </CardTitle>
               <CardDescription>{description}</CardDescription>
@@ -92,5 +93,5 @@ export function Features() {
         ))}
       </div>
     </section>
-  );
+  )
 }

@@ -1,18 +1,19 @@
-import { AddBookmarkForm } from "@/components/add-bookmark-form";
-import { Header } from "@/components/header";
-import { getFolders } from "@/lib/folder";
-import { auth } from "@clerk/nextjs";
-import { ChevronLeft } from "lucide-react";
-import Link from "next/link";
+import Link from "next/link"
+import { auth } from "@clerk/nextjs"
+import { ChevronLeft } from "lucide-react"
+
+import { getFolders } from "@/lib/folder"
+import { AddBookmarkForm } from "@/components/add-bookmark-form"
+import { Header } from "@/components/header"
 
 export default async function NewBookmarkPage() {
-  const { userId } = auth();
+  const { userId } = auth()
 
   if (!userId) {
-    return null;
+    return null
   }
 
-  const folders = await getFolders(userId);
+  const folders = await getFolders(userId)
 
   return (
     <div className="flex flex-col">
@@ -21,13 +22,13 @@ export default async function NewBookmarkPage() {
         <ChevronLeft className="mr-2 h-4 w-4" />
         Back
       </Link>
-      <div className="py-8 font-medium tracking-tight text-5xl">
+      <div className="py-8 text-5xl font-medium tracking-tight">
         New Bookmark
       </div>
-      <div className="text-muted-foreground mb-5">
+      <div className="mb-5 text-muted-foreground">
         Please provide the information below to add your bookmark.
       </div>
       <AddBookmarkForm userId={userId} folders={folders} />
     </div>
-  );
+  )
 }

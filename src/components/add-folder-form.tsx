@@ -1,10 +1,11 @@
-"use client";
+"use client"
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { useRouter } from "next/navigation"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import * as z from "zod"
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -12,30 +13,30 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
-import { useToast } from "./ui/use-toast";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+
+import { useToast } from "./ui/use-toast"
 
 const FormSchema = z.object({
   folderName: z.string().min(1, {
     message: "Name must be at least 1 characters.",
   }),
-});
+})
 
 export function AddFolderForm({ userId }: { userId: string }) {
-  const router = useRouter();
-  const { toast } = useToast();
+  const router = useRouter()
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       folderName: "",
     },
-  });
+  })
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    const { folderName } = data;
+    const { folderName } = data
 
     try {
       const newFolder = await fetch("/api/folders", {
@@ -44,21 +45,21 @@ export function AddFolderForm({ userId }: { userId: string }) {
         headers: {
           "Content-Type": "application/json",
         },
-      });
+      })
 
-      router.push("/dashboard");
-      router.refresh();
+      router.push("/dashboard")
+      router.refresh()
 
       toast({
         title: "Folder added",
         description: "Folder has been added to your list.",
-      });
+      })
     } catch (error) {
       toast({
         variant: "destructive",
         title: "Error",
         description: "An error occurred while adding your bookmark.",
-      });
+      })
     }
   }
 
@@ -66,7 +67,7 @@ export function AddFolderForm({ userId }: { userId: string }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full md:w-2/3 space-y-6"
+        className="w-full space-y-6 md:w-2/3"
       >
         <FormField
           control={form.control}
@@ -86,5 +87,5 @@ export function AddFolderForm({ userId }: { userId: string }) {
         </Button>
       </form>
     </Form>
-  );
+  )
 }

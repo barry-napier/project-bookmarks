@@ -1,14 +1,15 @@
-import { BookmarkIcon } from "lucide-react";
-import Link from "next/link";
-import { Button } from "./ui/button";
+import Link from "next/link"
+import { BookmarkIcon } from "lucide-react"
+
+import { Button } from "./ui/button"
 
 export function NoBookmarks() {
   return (
-    <div className="flex flex-col border-dashed border-2 py-40 p-8 items-center justify-center">
-      <div className="flex w-20 h-20 bg-muted items-center justify-center rounded-full">
-        <BookmarkIcon className="w-8 h-8" />
+    <div className="flex flex-col items-center justify-center border-2 border-dashed p-8 py-40">
+      <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted">
+        <BookmarkIcon className="h-8 w-8" />
       </div>
-      <div className="flex py-2 text-xl font-semibold mt-6">
+      <div className="mt-6 flex py-2 text-xl font-semibold">
         No Bookmarks Created
       </div>
       <div className="flex text-sm text-muted-foreground">
@@ -22,5 +23,5 @@ export function NoBookmarks() {
         </Link>
       </div>
     </div>
-  );
+  )
 }

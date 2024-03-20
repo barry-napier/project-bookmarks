@@ -1,31 +1,32 @@
-import { BookmarkHeader } from "@/components/bookmark-header";
-import { BookmarkList } from "@/components/bookmark-list";
-import { Header } from "@/components/header";
-import { getBookmarksByFolder } from "@/lib/bookmarks";
-import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs"
+
+import { getBookmarksByFolder } from "@/lib/bookmarks"
+import { db } from "@/lib/db"
+import { BookmarkHeader } from "@/components/bookmark-header"
+import { BookmarkList } from "@/components/bookmark-list"
+import { Header } from "@/components/header"
 
 export default async function BookmarksByFolder({
   params,
 }: {
-  params: { id: string };
+  params: { id: string }
 }) {
-  const { userId } = auth();
+  const { userId } = auth()
 
   if (!userId) {
-    return null;
+    return null
   }
 
-  const { id: folderId } = params;
+  const { id: folderId } = params
 
   if (!userId) {
-    return null;
+    return null
   }
 
   const selectedFolder = await db.folder.findUnique({
     where: { id: folderId },
-  });
-  const bookmarks = await getBookmarksByFolder(userId, folderId);
+  })
+  const bookmarks = await getBookmarksByFolder(userId, folderId)
 
   return (
     <>
@@ -35,5 +36,5 @@ export default async function BookmarksByFolder({
         <BookmarkList bookmarks={bookmarks} />
       </section>
     </>
-  );
+  )
 }

@@ -1,41 +1,42 @@
-"use client";
+"use client"
 
-import { Bookmark } from "@prisma/client";
-import { useRouter } from "next/navigation";
-import { ClipboardEvent, useRef } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
-import { BookmarkBarInstructions } from "./bookmark-bar-instructions";
-import { BookmarkItem } from "./bookmark-item";
-import { NoBookmarks } from "./no-bookmarks";
+import { ClipboardEvent, useRef } from "react"
+import { useRouter } from "next/navigation"
+import { Bookmark } from "@prisma/client"
+import { useHotkeys } from "react-hotkeys-hook"
+
+import { BookmarkBarInstructions } from "./bookmark-bar-instructions"
+import { BookmarkItem } from "./bookmark-item"
+import { NoBookmarks } from "./no-bookmarks"
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from "./ui/command";
+} from "./ui/command"
 
 type BookmarkListProps = {
-  bookmarks: Bookmark[];
-};
+  bookmarks: Bookmark[]
+}
 
 export function BookmarkList({ bookmarks }: BookmarkListProps) {
-  const searchBarInput = useRef<HTMLInputElement>(null);
+  const searchBarInput = useRef<HTMLInputElement>(null)
 
   useHotkeys(
     "meta+k",
     () => {
-      searchBarInput.current?.focus();
+      searchBarInput.current?.focus()
     },
     { preventDefault: true }
-  );
+  )
 
-  const router = useRouter();
+  const router = useRouter()
 
   async function handlePaste(e: ClipboardEvent<HTMLInputElement>) {
-    e.preventDefault();
+    e.preventDefault()
 
-    const url = e.clipboardData.getData("text/plain");
+    const url = e.clipboardData.getData("text/plain")
 
     if (url) {
       const response = await fetch("/api/bookmarks", {
@@ -44,17 +45,17 @@ export function BookmarkList({ bookmarks }: BookmarkListProps) {
         headers: {
           "Content-Type": "application/json",
         },
-      });
+      })
 
       if (response.ok) {
-        router.push("/");
-        router.refresh();
+        router.push("/")
+        router.refresh()
       }
     }
   }
 
   if (bookmarks.length === 0) {
-    return <NoBookmarks />;
+    return <NoBookmarks />
   }
 
   return (
@@ -64,9 +65,9 @@ export function BookmarkList({ bookmarks }: BookmarkListProps) {
           placeholder="Search bookmarks..."
           onPaste={handlePaste}
           ref={searchBarInput}
-          className="py-3 px-4 rounded-[0]"
+          className="rounded-[0] px-4 py-3"
         />
-        <CommandEmpty className="flex items-center justify-center text-muted-foreground py-8">
+        <CommandEmpty className="flex items-center justify-center py-8 text-muted-foreground">
           No bookmarks found.
         </CommandEmpty>
         <CommandGroup>
@@ -83,18 +84,18 @@ export function BookmarkList({ bookmarks }: BookmarkListProps) {
                     headers: {
                       "Content-Type": "application/json",
                     },
-                  });
-                  router.push(bookmark.url);
+                  })
+                  router.push(bookmark.url)
                 }}
-                className="border-accent last:border-none rounded-none py-3 flex items-center w-full"
+                className="flex w-full items-center rounded-none border-accent py-3 last:border-none"
               >
                 <BookmarkItem bookmark={bookmark} />
               </CommandItem>
-            );
+            )
           })}
         </CommandGroup>
         <BookmarkBarInstructions />
       </Command>
     </div>
-  );
+  )
 }

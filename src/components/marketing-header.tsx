@@ -1,20 +1,21 @@
-import { auth } from "@clerk/nextjs";
-import { BookmarkIcon } from "lucide-react";
-import Link from "next/link";
-import { Button } from "./ui/button";
+import Link from "next/link"
+import { auth } from "@clerk/nextjs"
+import { BookmarkIcon } from "lucide-react"
+
+import { Button } from "./ui/button"
 
 export function MarketingHeader() {
-  const { userId } = auth();
+  const { userId } = auth()
 
   return (
     <header>
-      <div className="py-8 flex items-center justify-between">
+      <div className="flex items-center justify-between py-8">
         <Link
           href="\"
-          className="text-foreground hover:text-accent-foreground flex items-center gap-1"
+          className="flex items-center gap-1 text-foreground hover:text-accent-foreground"
         >
-          <BookmarkIcon className="w-7 h-7" />
-          <div className="flex font-semibold text-xl tracking-tight">
+          <BookmarkIcon className="h-7 w-7" />
+          <div className="flex text-xl font-semibold tracking-tight">
             Bookmarking.io
           </div>
         </Link>
@@ -38,5 +39,5 @@ export function MarketingHeader() {
         )}
       </div>
     </header>
-  );
+  )
 }

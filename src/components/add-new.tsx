@@ -1,18 +1,19 @@
-"use client";
+"use client"
 
-import { ChevronDown, PlusIcon } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Button } from "./ui/button";
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { ChevronDown, PlusIcon } from "lucide-react"
+
+import { Button } from "./ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "./ui/dropdown-menu"
 
 export function AddNewButton() {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <>
@@ -20,9 +21,9 @@ export function AddNewButton() {
         <DropdownMenuTrigger asChild>
           <Button className="flex items-center gap-2">
             <div className="flex items-center gap-2">
-              <PlusIcon className="w-4 h-4 md:hidden" />
+              <PlusIcon className="h-4 w-4 md:hidden" />
               <div className="hidden md:block">Add New</div>
-              <ChevronDown className="w-4 h-4 hidden md:block" />
+              <ChevronDown className="hidden h-4 w-4 md:block" />
             </div>
           </Button>
         </DropdownMenuTrigger>
@@ -36,5 +37,5 @@ export function AddNewButton() {
         </DropdownMenuContent>
       </DropdownMenu>
     </>
-  );
+  )
 }

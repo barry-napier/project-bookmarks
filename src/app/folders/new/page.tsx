@@ -1,14 +1,16 @@
-import { Header } from "@/components/header";
-import { auth } from "@clerk/nextjs";
-import { ChevronLeft } from "lucide-react";
-import Link from "next/link";
-import { AddFolderForm } from "../../../components/add-folder-form";
+import Link from "next/link"
+import { auth } from "@clerk/nextjs"
+import { ChevronLeft } from "lucide-react"
+
+import { Header } from "@/components/header"
+
+import { AddFolderForm } from "../../../components/add-folder-form"
 
 export default function NewBookmarkPage() {
-  const { userId } = auth();
+  const { userId } = auth()
 
   if (!userId) {
-    return null;
+    return null
   }
 
   return (
@@ -18,11 +20,11 @@ export default function NewBookmarkPage() {
         <ChevronLeft className="mr-2 h-4 w-4" />
         Back
       </Link>
-      <div className="py-8 font-medium tracking-tight text-5xl">New Folder</div>
-      <div className="text-muted-foreground mb-5">
+      <div className="py-8 text-5xl font-medium tracking-tight">New Folder</div>
+      <div className="mb-5 text-muted-foreground">
         Please provide the information below to add your folder.
       </div>
       <AddFolderForm userId={userId} />
     </div>
-  );
+  )
 }

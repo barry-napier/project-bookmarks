@@ -1,10 +1,13 @@
-"use client";
+"use client"
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import Image from "next/image"
+import { useRouter } from "next/navigation"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Folder } from "@prisma/client"
+import { useForm } from "react-hook-form"
+import * as z from "zod"
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -12,19 +15,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Folder } from "@prisma/client";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
-import { useToast } from "./ui/use-toast";
+} from "./ui/select"
+import { useToast } from "./ui/use-toast"
 
 const FormSchema = z.object({
   title: z.string().min(2, {
@@ -37,19 +38,19 @@ const FormSchema = z.object({
     message: "Favicon must be a valid URL.",
   }),
   folderId: z.string(),
-});
+})
 
 type AddBookmarkFormProps = {
-  userId: string;
-  folders: Folder[] | null;
-};
+  userId: string
+  folders: Folder[] | null
+}
 
 export function AddBookmarkForm({
   userId,
   folders,
 }: Readonly<AddBookmarkFormProps>) {
-  const router = useRouter();
-  const { toast } = useToast();
+  const router = useRouter()
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -59,10 +60,10 @@ export function AddBookmarkForm({
       favicon: "",
       folderId: "",
     },
-  });
+  })
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    const { title, url, favicon, folderId } = data;
+    const { title, url, favicon, folderId } = data
 
     try {
       await fetch("/api/bookmarks", {
@@ -71,21 +72,21 @@ export function AddBookmarkForm({
         headers: {
           "Content-Type": "application/json",
         },
-      });
+      })
 
-      router.push("/dashboard");
-      router.refresh();
+      router.push("/dashboard")
+      router.refresh()
 
       toast({
         title: "Bookmark added",
         description: "Bookmark has been added to your list.",
-      });
+      })
     } catch (error) {
       toast({
         variant: "destructive",
         title: "Error",
         description: "An error occurred while adding your bookmark.",
-      });
+      })
     }
   }
 
@@ -93,7 +94,7 @@ export function AddBookmarkForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full md:w-2/3 space-y-6"
+        className="w-full space-y-6 md:w-2/3"
       >
         <FormField
           control={form.control}
@@ -129,10 +130,7 @@ export function AddBookmarkForm({
               <FormItem>
                 <FormLabel>Favicon</FormLabel>
                 <FormControl>
-                  <Input
-                    {...field}
-                    value={field.value}
-                  />
+                  <Input {...field} value={field.value} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -176,5 +174,5 @@ export function AddBookmarkForm({
         </Button>
       </form>
     </Form>
-  );
+  )
 }

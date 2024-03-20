@@ -1,30 +1,31 @@
-"use client";
+"use client"
+
+import { useRouter } from "next/navigation"
+import { Folder } from "@prisma/client"
+import { ChevronDown } from "lucide-react"
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Folder } from "@prisma/client";
-import { ChevronDown } from "lucide-react";
-import { useRouter } from "next/navigation";
+} from "@/components/ui/dropdown-menu"
 
 export function FolderSelection({
   folders,
   selectedFolder = null,
 }: {
-  folders: Folder[];
-  selectedFolder?: Folder | null;
+  folders: Folder[]
+  selectedFolder?: Folder | null
 }) {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <div className="font-medium tracking-tight text-muted-foreground flex items-center text-2xl md:text-5xl">
+        <div className="flex items-center text-2xl font-medium tracking-tight text-muted-foreground md:text-5xl">
           <div className="flex items-center gap-2">
-            <ChevronDown className="w-8 h-8" />
+            <ChevronDown className="h-8 w-8" />
             {selectedFolder ? selectedFolder.name : "All"}
           </div>
         </div>
@@ -43,5 +44,5 @@ export function FolderSelection({
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }

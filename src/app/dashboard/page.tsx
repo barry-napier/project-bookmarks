@@ -1,17 +1,18 @@
-import { BookmarkHeader } from "@/components/bookmark-header";
-import { BookmarkList } from "@/components/bookmark-list";
-import { Header } from "@/components/header";
-import { getBookmarks } from "@/lib/bookmarks";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs"
+
+import { getBookmarks } from "@/lib/bookmarks"
+import { BookmarkHeader } from "@/components/bookmark-header"
+import { BookmarkList } from "@/components/bookmark-list"
+import { Header } from "@/components/header"
 
 export default async function Home() {
-  const { userId } = auth();
+  const { userId } = auth()
 
   if (!userId) {
-    return null;
+    return null
   }
 
-  const bookmarks = await getBookmarks(userId);
+  const bookmarks = await getBookmarks(userId)
 
   return (
     <>
@@ -21,5 +22,5 @@ export default async function Home() {
         <BookmarkList bookmarks={bookmarks} />
       </section>
     </>
-  );
+  )
 }

@@ -1,8 +1,9 @@
-import { Bookmark } from "@prisma/client";
-import { AlertCircle, Trash2Icon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { Button } from "./ui/button";
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { Bookmark } from "@prisma/client"
+import { AlertCircle, Trash2Icon } from "lucide-react"
+
+import { Button } from "./ui/button"
 import {
   Dialog,
   DialogContent,
@@ -10,20 +11,20 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
+} from "./ui/dialog"
 
 export function DeleteBookmark({ bookmark }: { bookmark: Bookmark }) {
-  const [open, setOpen] = useState(false);
-  const router = useRouter();
+  const [open, setOpen] = useState(false)
+  const router = useRouter()
 
   async function handleDelete(id: string) {
     const response = await fetch(`/api/bookmarks`, {
       method: "DELETE",
       body: JSON.stringify({ id }),
-    });
+    })
 
     if (response.ok) {
-      router.refresh();
+      router.refresh()
     }
   }
 
@@ -33,11 +34,11 @@ export function DeleteBookmark({ bookmark }: { bookmark: Bookmark }) {
         <Button
           variant="outline"
           onClick={(e) => {
-            e.stopPropagation();
-            setOpen(true);
+            e.stopPropagation()
+            setOpen(true)
           }}
         >
-          <Trash2Icon className="w-4 h-4" />
+          <Trash2Icon className="h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -50,11 +51,11 @@ export function DeleteBookmark({ bookmark }: { bookmark: Bookmark }) {
             This action cannot be undone.
           </DialogDescription>
         </DialogHeader>
-        <div className="flex items-center gap-2 justify-end">
+        <div className="flex items-center justify-end gap-2">
           <Button
             onClick={(e) => {
-              e.stopPropagation();
-              setOpen(false);
+              e.stopPropagation()
+              setOpen(false)
             }}
           >
             Cancel
@@ -62,8 +63,8 @@ export function DeleteBookmark({ bookmark }: { bookmark: Bookmark }) {
           <Button
             variant="destructive"
             onClick={(e) => {
-              e.stopPropagation();
-              handleDelete(bookmark.id);
+              e.stopPropagation()
+              handleDelete(bookmark.id)
             }}
           >
             Delete
@@ -71,5 +72,5 @@ export function DeleteBookmark({ bookmark }: { bookmark: Bookmark }) {
         </div>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

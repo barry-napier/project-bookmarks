@@ -1,13 +1,8 @@
-import { CheckIcon } from "lucide-react";
-import Link from "next/link";
-import { Button } from "./ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+import Link from "next/link"
+import { CheckIcon } from "lucide-react"
+
+import { Button } from "./ui/button"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card"
 
 export default function Pricing() {
   const pricing = [
@@ -42,7 +37,7 @@ export default function Pricing() {
       ],
       buttonText: "Coming Soon",
     },
-  ];
+  ]
 
   return (
     <section className="flex flex-col gap-8 pb-40">
@@ -52,13 +47,13 @@ export default function Pricing() {
           <Card key={price.name} className="shadow-md">
             <CardHeader>
               <CardTitle>
-                <div className="flex items-center gap-2 mb-6 text-4xl">
+                <div className="mb-6 flex items-center gap-2 text-4xl">
                   {price.name}
                 </div>
               </CardTitle>
             </CardHeader>
-            <CardContent className="text-muted-foreground h-80">
-              <div className="flex text-6xl mb-4">{price.price.month}</div>
+            <CardContent className="h-80 text-muted-foreground">
+              <div className="mb-4 flex text-6xl">{price.price.month}</div>
               {price.features.map((feature) => (
                 <div key={feature} className="flex items-center gap-2 pb-2">
                   <CheckIcon />
@@ -67,7 +62,7 @@ export default function Pricing() {
               ))}
             </CardContent>
             <CardFooter className="w-full">
-              <Link href="/sign-up" className="text-center w-full">
+              <Link href="/sign-up" className="w-full text-center">
                 <Button size="xl" className="w-full">
                   {price.buttonText}
                 </Button>
@@ -77,5 +72,5 @@ export default function Pricing() {
         ))}
       </div>
     </section>
-  );
+  )
 }

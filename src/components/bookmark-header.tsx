@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server';
+import { createClient } from '@/util/supabase/server';
 import { AddNewButton } from './add-new';
 import { FolderSelection } from './folder-selection';
 import { redirect } from 'next/navigation';

@@ -1,14 +1,13 @@
-import { Bookmark } from "@prisma/client";
-import { EditIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { DeleteBookmark } from "./delete-bookmark";
-import { Button } from "./ui/button";
+import { EditIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { DeleteBookmark } from './delete-bookmark';
+import { Button } from './ui/button';
 
 type BookmarkListProps = {
-  bookmark: Bookmark;
+  readonly bookmark: Bookmark;
 };
 
-export function BookmarkItem({ bookmark }: Readonly<BookmarkListProps>) {
+export function BookmarkItem({ bookmark }: BookmarkListProps) {
   const router = useRouter();
   return (
     <div className="flex items-center justify-between w-full">

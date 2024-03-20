@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -12,36 +12,37 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Bookmark } from "@prisma/client";
-import { useRouter } from "next/navigation";
-import { useToast } from "./ui/use-toast";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useRouter } from 'next/navigation';
+import { useToast } from './ui/use-toast';
+
+type EditBookmarkFormProps = {
+  userId: string;
+  bookmark: Bookmark | null;
+};
 
 const FormSchema = z.object({
   title: z.string().min(2, {
-    message: "Title must be at least 2 characters.",
+    message: 'Title must be at least 2 characters.',
   }),
   url: z.string().url({
-    message: "URL must be a valid URL.",
+    message: 'URL must be a valid URL.',
   }),
 });
 
 export function EditBookmarkForm({
   userId,
   bookmark,
-}: {
-  userId: string;
-  bookmark: Bookmark;
-}) {
+}: Readonly<EditBookmarkFormProps>) {
   const router = useRouter();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      title: bookmark.title,
-      url: bookmark.url,
+      title: bookmark?.title ?? '',
+      url: bookmark?.url ?? '',
     },
   });
 
@@ -49,26 +50,26 @@ export function EditBookmarkForm({
     const { title, url } = data;
 
     try {
-      const newBookmark = await fetch("/api/bookmarks", {
-        method: "PUT",
-        body: JSON.stringify({ title, url, userId, id: bookmark.id }),
+      await fetch('/api/bookmarks', {
+        method: 'PUT',
+        body: JSON.stringify({ title, url, userId, id: bookmark?.id }),
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
 
-      router.push("/dashboard");
+      router.push('/dashboard');
       router.refresh();
 
       toast({
-        title: "Bookmark updated",
-        description: "Bookmark has been updated to your list.",
+        title: 'Bookmark updated',
+        description: 'Bookmark has been updated to your list.',
       });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "An error occurred while adding your bookmark.",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'An error occurred while adding your bookmark.',
       });
     }
   }

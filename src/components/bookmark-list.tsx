@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ClipboardEvent, useRef } from 'react';
+import { useRef } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { BookmarkBarInstructions } from './bookmark-bar-instructions';
 import { BookmarkItem } from './bookmark-item';
@@ -14,19 +14,11 @@ import {
   CommandItem,
 } from './ui/command';
 
-type Bookmark = {
-  id: string;
-  title: string;
-  url: string;
-  folderId: string;
-  clicks: number;
-};
-
 type BookmarkListProps = {
-  bookmarks: Bookmark[];
+  readonly bookmarks: Bookmark[] | null;
 };
 
-export function BookmarkList({ bookmarks }: Readonly<BookmarkListProps>) {
+export function BookmarkList({ bookmarks }: BookmarkListProps) {
   const searchBarInput = useRef<HTMLInputElement>(null);
 
   useHotkeys(
@@ -39,27 +31,6 @@ export function BookmarkList({ bookmarks }: Readonly<BookmarkListProps>) {
 
   const router = useRouter();
 
-  async function handlePaste(e: ClipboardEvent<HTMLInputElement>) {
-    e.preventDefault();
-
-    const url = e.clipboardData.getData('text/plain');
-
-    if (url) {
-      const response = await fetch('/api/bookmarks', {
-        method: 'POST',
-        body: JSON.stringify({ title: url, url }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        router.push('/');
-        router.refresh();
-      }
-    }
-  }
-
   if (bookmarks?.length === 0) {
     return <NoBookmarks />;
   }
@@ -69,7 +40,6 @@ export function BookmarkList({ bookmarks }: Readonly<BookmarkListProps>) {
       <Command>
         <CommandInput
           placeholder="Search bookmarks..."
-          onPaste={handlePaste}
           ref={searchBarInput}
           className="py-3 px-4 rounded-[0]"
         />

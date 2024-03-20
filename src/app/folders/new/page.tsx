@@ -1,15 +1,13 @@
-import { Header } from "@/components/header";
-import { auth } from "@clerk/nextjs";
-import { ChevronLeft } from "lucide-react";
-import Link from "next/link";
-import { AddFolderForm } from "../../../components/add-folder-form";
+import { Header } from '@/components/header';
+import { ChevronLeft } from 'lucide-react';
+import Link from 'next/link';
+import { AddFolderForm } from '../../../components/add-folder-form';
+import { createClient } from '@/util/supabase/server';
+import { getAuthorizedUser } from '@/lib/utils';
 
-export default function NewBookmarkPage() {
-  const { userId } = auth();
-
-  if (!userId) {
-    return null;
-  }
+export default async function NewBookmarkPage() {
+  const supabase = createClient();
+  const { id } = await getAuthorizedUser(supabase);
 
   return (
     <div className="flex flex-col">
@@ -22,7 +20,7 @@ export default function NewBookmarkPage() {
       <div className="text-muted-foreground mb-5">
         Please provide the information below to add your folder.
       </div>
-      <AddFolderForm userId={userId} />
+      <AddFolderForm userId={id} />
     </div>
   );
 }

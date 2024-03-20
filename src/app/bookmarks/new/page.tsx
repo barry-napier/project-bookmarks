@@ -1,19 +1,13 @@
 import { AddBookmarkForm } from '@/components/add-bookmark-form';
 import { Header } from '@/components/header';
-import { createClient } from '@/lib/supabase/server';
+import { getAuthorizedUser } from '@/lib/utils';
+import { createClient } from '@/util/supabase/server';
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 
 export default async function NewBookmarkPage() {
   const supabase = createClient();
-
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
-    redirect('/login');
-  }
-
-  const userId = data.user.id;
+  const { id } = await getAuthorizedUser(supabase);
 
   const { data: folders } = await supabase.from('folders').select();
 
@@ -30,7 +24,7 @@ export default async function NewBookmarkPage() {
       <div className="text-muted-foreground mb-5">
         Please provide the information below to add your bookmark.
       </div>
-      <AddBookmarkForm userId={userId} folders={folders} />
+      <AddBookmarkForm userId={id} folders={folders} />
     </div>
   );
 }

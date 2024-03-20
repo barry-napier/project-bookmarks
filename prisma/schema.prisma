@@ -1,7 +1,7 @@
+// prisma/schema.prisma
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -19,7 +19,7 @@ model Bookmark {
   folderId  String?
   folder    Folder?  @relation(fields: [folderId], references: [id])
   favion    String?
-  
+
   @@index([userId])
   @@index([folderId])
 }

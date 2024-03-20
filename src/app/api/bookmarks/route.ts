@@ -21,9 +21,11 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const { title, url, userId, folderId } = await request.json();
+  const { title, url, userId, favicon, folderId } = await request.json();
 
-  const newBookmark = await createBookmark(title, url, userId, folderId);
+  const folder = folderId === "" ? null : folderId;
+
+  const newBookmark = await createBookmark(title, url, userId, favicon, folder);
 
   return Response.json(newBookmark, {
     status: 201,

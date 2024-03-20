@@ -39,13 +39,15 @@ const FormSchema = z.object({
   folderId: z.string(),
 });
 
+type AddBookmarkFormProps = {
+  userId: string;
+  folders: Folder[] | null;
+};
+
 export function AddBookmarkForm({
   userId,
   folders,
-}: {
-  userId: string;
-  folders: Folder[] | null;
-}) {
+}: Readonly<AddBookmarkFormProps>) {
   const router = useRouter();
   const { toast } = useToast();
 
@@ -63,7 +65,7 @@ export function AddBookmarkForm({
     const { title, url, favicon, folderId } = data;
 
     try {
-      const newBookmark = await fetch("/api/bookmarks", {
+      await fetch("/api/bookmarks", {
         method: "POST",
         body: JSON.stringify({ title, url, userId, favicon, folderId }),
         headers: {
@@ -129,18 +131,11 @@ export function AddBookmarkForm({
                 <FormControl>
                   <Input
                     {...field}
-                    value={`https://www.google.com/s2/favicons?domain=${field.value}&sz=128`}
+                    value={field.value}
                   />
                 </FormControl>
                 <FormMessage />
               </FormItem>
-              <Image
-                src={field.value}
-                alt="Bookmark icon"
-                width="32"
-                height="32"
-                loading="lazy"
-              />
             </div>
           )}
         />

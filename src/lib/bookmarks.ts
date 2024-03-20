@@ -2,7 +2,7 @@ import { db } from "./db";
 
 export async function getBookmarks(userId: string) {
   try {
-    const bookmarks = db.bookmark.findMany({
+    const bookmarks = await db.bookmark.findMany({
       where: {
         userId,
       },
@@ -19,7 +19,7 @@ export async function getBookmarks(userId: string) {
 
 export async function getBookmarksByFolder(userId: string, folderId: string) {
   try {
-    const bookmarks = db.bookmark.findMany({
+    const bookmarks = await db.bookmark.findMany({
       where: {
         userId,
         folderId,
@@ -39,13 +39,16 @@ export async function createBookmark(
   title: string,
   url: string,
   userId: string,
-  folderId: string
+  favicon: string,
+  folderId: string | null
 ) {
+  console.log({ title, url, userId, favicon, folderId });
   try {
     const bookmark = await db.bookmark.create({
       data: {
         title,
         url,
+        favicon,
         userId,
         folderId,
       },

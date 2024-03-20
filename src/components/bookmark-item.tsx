@@ -12,15 +12,22 @@ export function BookmarkItem({ bookmark }: Readonly<BookmarkListProps>) {
   const router = useRouter();
   return (
     <div className="flex items-center justify-between w-full">
-      <div className="flex gap-2">
-        <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-pink-400 rounded-full"></div>
-        <div className="flex flex-col">
-          <div className="flex aria-selected:font-medium">{bookmark.title}</div>
-          <div className="text-muted-foreground text-xs w-48 md:w-[500px] lg:w-auto text-ellipsis overflow-hidden whitespace-nowrap">
-            {bookmark.url}
-          </div>
-        </div>
-      </div>
+<div className="flex gap-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-pink-400 rounded-full">
+                {bookmark.favicon && <img
+                  className="w-8 h-8 object-cover rounded-full"
+                  src={bookmark.favicon}
+                  alt="Favicon"
+                  loading="lazy"
+                />}
+              </div>
+              <div className="flex flex-col">
+                <div className="flex aria-selected:font-medium">{bookmark.title}</div>
+                <div className="text-muted-foreground text-xs w-48 md:w-[500px] lg:w-auto text-ellipsis overflow-hidden whitespace-nowrap">
+                  {bookmark.url}
+                </div>
+              </div>
+            </div>
       <div className="hidden group-aria-selected:flex items-center gap-2 h-4">
         <Button
           variant="outline"

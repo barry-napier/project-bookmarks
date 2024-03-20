@@ -17,7 +17,7 @@ model Bookmark {
   userId    String
   folderId  String?
   folder    Folder?  @relation(fields: [folderId], references: [id])
-  favion    String?
+  favicon   String?
 
   @@index([userId])
   @@index([folderId])

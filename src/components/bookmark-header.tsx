@@ -1,10 +1,8 @@
-import { auth } from "@clerk/nextjs"
-import { Folder } from "@prisma/client"
-
-import { db } from "@/lib/db"
-
 import { AddNewButton } from "./add-new"
 import { FolderSelection } from "./folder-selection"
+import { db } from "@/lib/db"
+import { auth } from "@clerk/nextjs"
+import { Folder } from "@prisma/client"
 
 export async function BookmarkHeader({
   selectedFolder = null,

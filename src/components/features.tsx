@@ -1,3 +1,4 @@
+import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card"
 import {
   BookmarkPlusIcon,
   FoldersIcon,
@@ -8,8 +9,6 @@ import {
   Share2Icon,
   TagsIcon,
 } from "lucide-react"
-
-import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card"
 
 export function Features() {
   const features = [

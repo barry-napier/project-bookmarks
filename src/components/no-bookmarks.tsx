@@ -1,7 +1,6 @@
-import Link from "next/link"
-import { BookmarkIcon } from "lucide-react"
-
 import { Button } from "./ui/button"
+import { BookmarkIcon } from "lucide-react"
+import Link from "next/link"
 
 export function NoBookmarks() {
   return (

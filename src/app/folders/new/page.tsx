@@ -1,10 +1,8 @@
-import Link from "next/link"
+import { AddFolderForm } from "../../../components/add-folder-form"
+import { Header } from "@/components/header"
 import { auth } from "@clerk/nextjs"
 import { ChevronLeft } from "lucide-react"
-
-import { Header } from "@/components/header"
-
-import { AddFolderForm } from "../../../components/add-folder-form"
+import Link from "next/link"
 
 export default function NewBookmarkPage() {
   const { userId } = auth()

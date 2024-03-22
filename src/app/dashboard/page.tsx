@@ -1,9 +1,8 @@
-import { auth } from "@clerk/nextjs"
-
-import { getBookmarks } from "@/lib/bookmarks"
 import { BookmarkHeader } from "@/components/bookmark-header"
 import { BookmarkList } from "@/components/bookmark-list"
 import { Header } from "@/components/header"
+import { getBookmarks } from "@/lib/bookmarks"
+import { auth } from "@clerk/nextjs"
 
 export default async function Home() {
   const { userId } = auth()

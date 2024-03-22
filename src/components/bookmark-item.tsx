@@ -1,9 +1,8 @@
-import { useRouter } from "next/navigation"
-import { Bookmark } from "@prisma/client"
-import { EditIcon } from "lucide-react"
-
 import { DeleteBookmark } from "./delete-bookmark"
 import { Button } from "./ui/button"
+import { Bookmark } from "@prisma/client"
+import { EditIcon } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 type BookmarkListProps = {
   bookmark: Bookmark

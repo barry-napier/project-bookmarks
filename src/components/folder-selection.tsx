@@ -1,15 +1,14 @@
 "use client"
 
-import { useRouter } from "next/navigation"
-import { Folder } from "@prisma/client"
-import { ChevronDown } from "lucide-react"
-
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { Folder } from "@prisma/client"
+import { ChevronDown } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export function FolderSelection({
   folders,

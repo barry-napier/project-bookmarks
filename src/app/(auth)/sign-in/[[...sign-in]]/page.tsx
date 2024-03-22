@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation"
 import { auth, SignIn } from "@clerk/nextjs"
+import { redirect } from "next/navigation"
 
 export default function Page() {
   const { userId } = auth()

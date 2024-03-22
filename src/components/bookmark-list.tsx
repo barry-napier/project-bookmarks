@@ -1,10 +1,5 @@
 "use client"
 
-import { ClipboardEvent, useRef } from "react"
-import { useRouter } from "next/navigation"
-import { Bookmark } from "@prisma/client"
-import { useHotkeys } from "react-hotkeys-hook"
-
 import { BookmarkBarInstructions } from "./bookmark-bar-instructions"
 import { BookmarkItem } from "./bookmark-item"
 import { NoBookmarks } from "./no-bookmarks"
@@ -15,6 +10,10 @@ import {
   CommandInput,
   CommandItem,
 } from "./ui/command"
+import { Bookmark } from "@prisma/client"
+import { useRouter } from "next/navigation"
+import { ClipboardEvent, useRef } from "react"
+import { useHotkeys } from "react-hotkeys-hook"
 
 type BookmarkListProps = {
   bookmarks: Bookmark[]

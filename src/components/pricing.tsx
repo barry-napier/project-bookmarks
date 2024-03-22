@@ -1,8 +1,7 @@
-import Link from "next/link"
-import { CheckIcon } from "lucide-react"
-
 import { Button } from "./ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card"
+import { CheckIcon } from "lucide-react"
+import Link from "next/link"
 
 export default function Pricing() {
   const pricing = [

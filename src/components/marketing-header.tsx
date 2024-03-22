@@ -1,8 +1,7 @@
-import Link from "next/link"
+import { Button } from "./ui/button"
 import { auth } from "@clerk/nextjs"
 import { BookmarkIcon } from "lucide-react"
-
-import { Button } from "./ui/button"
+import Link from "next/link"
 
 export function MarketingHeader() {
   const { userId } = auth()

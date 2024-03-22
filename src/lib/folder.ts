@@ -1,4 +1,4 @@
-import { db } from "./db";
+import { db } from "./db"
 
 export async function getFolders(userId: string) {
   try {
@@ -6,11 +6,11 @@ export async function getFolders(userId: string) {
       where: {
         userId,
       },
-    });
-    return folders;
+    })
+    return folders
   } catch (error) {
-    console.error(error);
-    return null;
+    console.error(error)
+    return null
   }
 }
 
@@ -21,10 +21,10 @@ export async function createFolder(name: string, userId: string) {
         name,
         userId,
       },
-    });
-    return folder;
+    })
+    return folder
   } catch (error) {
-    console.error(error);
-    return null;
+    console.error(error)
+    return null
   }
 }

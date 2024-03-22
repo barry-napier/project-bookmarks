@@ -1,6 +1,5 @@
-import { ArrowDown, ArrowUp, CornerDownLeft } from "lucide-react"
-
 import { CommandShortcut } from "./ui/command"
+import { ArrowDown, ArrowUp, CornerDownLeft } from "lucide-react"
 
 export function BookmarkBarInstructions() {
   return (

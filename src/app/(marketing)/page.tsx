@@ -1,11 +1,10 @@
-import Image from "next/image"
-import Link from "next/link"
-
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { Features } from "@/components/features"
 import { MarketingHeader } from "@/components/marketing-header"
 import Pricing from "@/components/pricing"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import Image from "next/image"
+import Link from "next/link"
 
 export default function MarketingPage() {
   return (

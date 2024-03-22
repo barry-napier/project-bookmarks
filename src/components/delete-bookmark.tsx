@@ -1,8 +1,3 @@
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Bookmark } from "@prisma/client"
-import { AlertCircle, Trash2Icon } from "lucide-react"
-
 import { Button } from "./ui/button"
 import {
   Dialog,
@@ -12,6 +7,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog"
+import { Bookmark } from "@prisma/client"
+import { AlertCircle, Trash2Icon } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 export function DeleteBookmark({ bookmark }: { bookmark: Bookmark }) {
   const [open, setOpen] = useState(false)

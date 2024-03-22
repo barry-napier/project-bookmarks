@@ -1,4 +1,4 @@
-import { db } from "./db";
+import { db } from "./db"
 
 export async function getBookmarks(userId: string) {
   try {
@@ -9,11 +9,11 @@ export async function getBookmarks(userId: string) {
       orderBy: {
         clicks: "desc",
       },
-    });
-    return bookmarks;
+    })
+    return bookmarks
   } catch (error) {
-    console.error(error);
-    return [];
+    console.error(error)
+    return []
   }
 }
 
@@ -27,11 +27,11 @@ export async function getBookmarksByFolder(userId: string, folderId: string) {
       orderBy: {
         clicks: "desc",
       },
-    });
-    return bookmarks;
+    })
+    return bookmarks
   } catch (error) {
-    console.error(error);
-    return [];
+    console.error(error)
+    return []
   }
 }
 
@@ -42,7 +42,7 @@ export async function createBookmark(
   favicon: string,
   folderId: string | null
 ) {
-  console.log({ title, url, userId, favicon, folderId });
+  console.log({ title, url, userId, favicon, folderId })
   try {
     const bookmark = await db.bookmark.create({
       data: {
@@ -52,11 +52,11 @@ export async function createBookmark(
         userId,
         folderId,
       },
-    });
-    return bookmark;
+    })
+    return bookmark
   } catch (error) {
-    console.error(error);
-    return null;
+    console.error(error)
+    return null
   }
 }
 
@@ -66,9 +66,9 @@ export async function deleteBookmark(id: string) {
       where: {
         id,
       },
-    });
+    })
   } catch (error) {
-    console.error(error);
+    console.error(error)
   }
 }
 
@@ -83,9 +83,9 @@ export async function incrementClickCount(id: string) {
           increment: 1,
         },
       },
-    });
+    })
   } catch (error) {
-    console.error(error);
+    console.error(error)
   }
 }
 
@@ -104,10 +104,10 @@ export async function updateBookmark(
         title,
         url,
       },
-    });
-    return bookmark;
+    })
+    return bookmark
   } catch (error) {
-    console.error(error);
-    return null;
+    console.error(error)
+    return null
   }
 }

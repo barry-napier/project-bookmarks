@@ -13,5 +13,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
       - name: Execute Prettier format check
-        run: npx prettier --check .
+        run: prettier --check .
